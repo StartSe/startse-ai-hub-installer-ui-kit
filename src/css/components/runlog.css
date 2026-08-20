@@ -1,0 +1,49 @@
+/* ---------- EXECUÇÃO E LOG ----------
+   Enquanto roda: spinner + frase com expectativa de tempo ("leva alguns
+   segundos"). Cada etapa concluída entra no log: check teal, nome à
+   esquerda, detalhe técnico em mono à direita. Erro interrompe o log
+   com a linha vermelha e a próxima ação.                                */
+
+.i-run {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 500 14px var(--i-font-base);
+  color: var(--i-body);
+}
+
+.i-log { display: block; margin-top: 10px; }
+
+.i-log__row {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--i-border-soft);
+  font-size: 14px;
+  color: var(--i-ink);
+}
+.i-log__row .i-ico { margin-top: 4px; }
+.i-log__row--ok   .i-ico { color: var(--i-ok); }
+.i-log__row--warn .i-ico { color: var(--i-warn); }
+.i-log__row--fail .i-ico { color: var(--i-err); }
+
+/* Uma linha só: nome à esquerda, detalhe à direita. */
+.i-log__line {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 0;
+}
+.i-log__det { font: 400 12px var(--i-font-mono); color: var(--i-muted); text-align: right; white-space: nowrap; }
+
+/* Falha: o nome fica, a causa e a ação entram embaixo. */
+.i-log__body { flex: 1; min-width: 0; }
+.i-log__err { display: block; font-size: 12.5px; color: var(--i-err); margin-top: 2px; line-height: 1.5; }
+.i-log__row .i-btn { margin-top: 10px; }
+
+@media (max-width: 560px) {
+  .i-log__line { flex-direction: column; gap: 2px; }
+  .i-log__det { text-align: left; white-space: normal; }
+}

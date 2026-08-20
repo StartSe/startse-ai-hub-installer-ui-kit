@@ -1,0 +1,94 @@
+/* CSS só desta página de referência — nada aqui faz parte do kit.
+   Se você está copiando algo daqui para um instalador, é sinal de que
+   falta um componente no kit. */
+
+.doc-hero { background: #070707; color: #fff; }
+.doc-hero__in, .doc-main { max-width: var(--i-shell-max); margin: 0 auto; padding: 0 32px; }
+.doc-hero__in { padding-top: 56px; padding-bottom: 52px; }
+.doc-hero h1 { font: 600 40px/1.1 var(--i-font-display); margin: 12px 0 10px; }
+.doc-hero p { margin: 0; font-size: 15px; color: #B3B3B3; line-height: 1.6; max-width: 70ch; }
+.doc-hero code { font: 400 14px var(--i-font-mono); color: #fff; }
+.doc-hero__badges { display: flex; align-items: center; gap: 16px; margin-top: 26px; flex-wrap: wrap; }
+.doc-hero__v {
+  font: 600 10px var(--i-font-base); letter-spacing: .1em; text-transform: uppercase;
+  color: #070707; background: #fff; padding: 4px 9px;
+}
+.doc-hero__note { font: 500 12.5px var(--i-font-base); color: #B3B3B3; }
+.doc-hero__pipe { width: 1px; height: 14px; background: #2E2E2E; }
+
+.doc-nav { position: sticky; top: 0; z-index: 10; background: var(--i-surface); border-bottom: 1px solid var(--i-border); }
+.doc-nav__in { max-width: var(--i-shell-max); margin: 0 auto; padding: 0 32px; display: flex; gap: 2px; height: 48px; overflow-x: auto; }
+.doc-nav a { display: inline-flex; align-items: center; padding: 0 12px; font: 500 13px var(--i-font-base); color: var(--i-body); white-space: nowrap; }
+.doc-nav a:hover { color: var(--i-action); }
+
+.doc-section { margin-top: 56px; scroll-margin-top: 68px; }
+.doc-h2 { font: 600 28px var(--i-font-display); margin: 0 0 4px; color: var(--i-ink); }
+.doc-lede { margin: 0 0 24px; font-size: 14px; color: var(--i-muted); max-width: 74ch; line-height: 1.6; }
+
+.doc-spec { background: var(--i-surface); border: 1px solid var(--i-border); display: grid; grid-template-columns: 300px minmax(0, 1fr); margin-top: 20px; }
+.doc-spec__info { padding: 24px 28px; border-right: 1px solid var(--i-border-soft); }
+.doc-spec__info h3 { font: 600 18px var(--i-font-display); margin: 0 0 6px; color: var(--i-ink); }
+.doc-spec__info p { margin: 0; font-size: 13px; color: var(--i-muted); line-height: 1.6; }
+.doc-spec__info code { display: block; font: 400 11px var(--i-font-mono); color: var(--i-faint); margin-top: 12px; line-height: 1.7; }
+.doc-spec__demo { padding: 24px 32px; background: var(--i-surface-2); min-width: 0; }
+.doc-spec__demo--dark { background: rgba(0, 0, 0, .6); }
+.doc-spec__demo--flush { padding: 0; }
+
+/* A barra e o shell só fazem sentido na largura real. Dentro da coluna
+   estreita da doc eles rolam em vez de comprimir — o snippet abaixo
+   continua na largura normal. */
+.doc-spec__demo--wide { overflow-x: auto; }
+.doc-spec__demo--wide > .i-topbar,
+.doc-spec__demo--wide > .i-shell { min-width: 940px; }
+
+.doc-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.doc-swatch { background: var(--i-surface); border: 1px solid var(--i-border); }
+.doc-swatch__chip { height: 56px; border-bottom: 1px solid var(--i-border-soft); }
+.doc-swatch__body { padding: 12px 14px; }
+.doc-swatch__var { display: block; font: 400 12px var(--i-font-mono); color: var(--i-action); }
+.doc-swatch__hex { display: block; font: 400 12px var(--i-font-mono); color: var(--i-muted); margin: 2px 0 6px; }
+.doc-swatch__use { display: block; font-size: 12px; color: var(--i-body); line-height: 1.45; }
+
+/* Snippet gerado a partir do <template> do próprio demo. */
+.doc-code { margin-top: 18px; border-top: 1px solid var(--i-border-soft); }
+.doc-code > summary {
+  cursor: pointer; padding: 10px 0 0; list-style: none;
+  font: 500 12px var(--i-font-base); color: var(--i-action);
+}
+.doc-code > summary::-webkit-details-marker { display: none; }
+.doc-code > summary::before { content: "▸ "; }
+.doc-code[open] > summary::before { content: "▾ "; }
+.doc-code__body { position: relative; margin-top: 10px; }
+.doc-code pre {
+  margin: 0; padding: 14px 16px; overflow-x: auto;
+  background: var(--i-canvas); border: 1px solid var(--i-border);
+  font: 400 12px/1.6 var(--i-font-mono); color: var(--i-body);
+}
+.doc-code button {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--i-surface); border: 1px solid var(--i-border); border-radius: var(--i-radius);
+  padding: 5px 10px; font: 600 11px var(--i-font-base); color: var(--i-action); cursor: pointer;
+}
+.doc-code button:hover { background: var(--i-action-tint); }
+
+.doc-two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.doc-panel { background: var(--i-surface); border: 1px solid var(--i-border); padding: 24px 28px; }
+.doc-panel__title { display: block; font: 500 11px var(--i-font-base); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
+.doc-panel__title--yes { color: var(--i-ok); }
+.doc-panel__title--no { color: var(--i-err); }
+.doc-panel ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.doc-panel li { font-size: 13.5px; color: var(--i-body); line-height: 1.55; }
+
+.doc-attrs { width: 100%; border-collapse: collapse; background: var(--i-surface); border: 1px solid var(--i-border); margin-top: 20px; }
+.doc-attrs th, .doc-attrs td { text-align: left; padding: 12px 18px; border-bottom: 1px solid var(--i-border-soft); vertical-align: top; }
+.doc-attrs th { font: 500 11px var(--i-font-base); letter-spacing: .1em; text-transform: uppercase; color: var(--i-muted); }
+.doc-attrs td:first-child { font: 400 12.5px var(--i-font-mono); color: var(--i-action); white-space: nowrap; }
+.doc-attrs td { font-size: 13.5px; color: var(--i-body); line-height: 1.55; }
+.doc-attrs tr:last-child td { border-bottom: none; }
+
+@media (max-width: 900px) {
+  .doc-spec { grid-template-columns: minmax(0, 1fr); }
+  .doc-spec__info { border-right: none; border-bottom: 1px solid var(--i-border-soft); }
+  .doc-two { grid-template-columns: 1fr; }
+  .doc-hero__in, .doc-main, .doc-nav__in { padding-left: 20px; padding-right: 20px; }
+}

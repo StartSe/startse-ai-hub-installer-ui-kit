@@ -1,0 +1,38 @@
+/* ---------- STEPPER ----------
+   Quadrado 30px, raio zero. Concluído teal com check; ativo azul com
+   número; futuro flat com contorno — nunca opacidade.
+   A nota de privacidade mora aqui, não no rodapé.                       */
+
+.i-stepper { display: block; }
+.i-stepper__title { padding-bottom: 14px; }
+
+.i-step {
+  display: grid;
+  grid-template-columns: var(--i-step-dot) 1fr;
+  gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--i-border);
+}
+
+.i-step__dot {
+  width: var(--i-step-dot);
+  height: var(--i-step-dot);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: 600 13px var(--i-font-base);
+  border: 1px solid var(--i-border-strong);
+  background: var(--i-surface);
+  color: var(--i-muted);
+}
+
+.i-step--active .i-step__dot { background: var(--i-action); border-color: var(--i-action); color: #fff; }
+.i-step--done   .i-step__dot { background: var(--i-ok);     border-color: var(--i-ok);     color: var(--i-check-ink); }
+
+.i-step__title { display: block; font: 600 15px var(--i-font-base); color: var(--i-ink); margin-bottom: 3px; }
+.i-step--future .i-step__title { color: var(--i-muted); }
+.i-step__desc { display: block; font-size: 12.5px; color: var(--i-muted); line-height: 1.5; }
+
+/* Nota de privacidade — fixa no fim do stepper. */
+.i-privacy { border-top: 1px solid var(--i-border); padding-top: 16px; margin-top: 2px; }
+.i-privacy p { margin: 8px 0 0; font-size: 12.5px; color: var(--i-body); line-height: 1.65; }

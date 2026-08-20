@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+*.log
+
+# dist/ NÃO entra aqui de propósito: a CDN (jsDelivr) serve os arquivos
+# direto do commit apontado pela tag, então o build precisa estar
+# commitado. `npm run check` garante que ele confere com o src/.

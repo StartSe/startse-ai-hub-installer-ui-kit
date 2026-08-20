@@ -1,0 +1,36 @@
+/* ---------- BASE ----------
+   Reset mínimo. O kit é dono da página inteira do instalador — assume
+   controle de body e canvas, mas não toca em nada fora de .i-*.        */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--i-canvas);
+  color: var(--i-ink);
+  font: 400 15px/1.5 var(--i-font-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: var(--i-action); text-decoration: none; }
+a:hover { color: var(--i-action-hover); }
+
+/* Foco visível em tudo que recebe teclado. Componentes com indicador
+   próprio (campos underline, tabs) neutralizam isso no arquivo deles. */
+:where(a, button, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--i-action);
+  outline-offset: 2px;
+}
+
+@keyframes i-gira { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  /* O spinner é sinal de estado, não decoração: mantém girando, mas devagar. */
+  .i-spinner { animation: i-gira 2.4s linear infinite !important; }
+}

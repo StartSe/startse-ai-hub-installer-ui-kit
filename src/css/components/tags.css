@@ -1,0 +1,47 @@
+/* ---------- TAGS, CHIPS E TABS ----------
+   Tag grita status (caps 10px, fundo semântico, raio zero); chip só
+   descreve (sentence case, raio 2px). Tabs para vistas paralelas do
+   mesmo conteúdo — nunca para os passos, que são o stepper.             */
+
+.i-tag {
+  display: inline-block;
+  font: 600 10px var(--i-font-base);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+.i-tag--info { color: var(--i-tag-info-ink); background: var(--i-tag-info-bg); }
+.i-tag--ok   { color: var(--i-ok-ink);       background: var(--i-ok-bg); }
+.i-tag--warn { color: var(--i-warn-ink);     background: var(--i-warn-bg); }
+.i-tag--err  { color: var(--i-err-ink);      background: var(--i-err-bg); }
+
+.i-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--i-border);
+  border-radius: var(--i-radius);
+  padding: 5px 10px;
+  font: 400 13px var(--i-font-base);
+  background: var(--i-surface);
+  color: var(--i-ink);
+}
+
+.i-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--i-border); }
+.i-tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--i-muted);
+  font: 400 14px var(--i-font-base);
+  padding: 9px 12px 8px;
+  margin-bottom: -1px;
+  cursor: pointer;
+}
+.i-tab:hover { color: var(--i-ink); }
+.i-tab--active,
+.i-tab[aria-selected="true"] { border-bottom-color: var(--i-action); color: var(--i-ink); font-weight: 600; }
+.i-tab:focus-visible { outline-offset: -2px; }
+
+.i-tabpanel[hidden] { display: none; }

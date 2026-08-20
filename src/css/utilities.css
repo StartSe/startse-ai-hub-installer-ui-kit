@@ -1,0 +1,31 @@
+/* ---------- UTILITÁRIOS ----------
+   Conjunto deliberadamente pequeno: só o que evita o consumidor abrir
+   uma tag <style> para empilhar coisas. Não é um framework utilitário —
+   se você precisa de algo daqui que não existe, provavelmente o caso é
+   um componente novo no kit.                                            */
+
+.i-stack        { display: flex; flex-direction: column; gap: 14px; }
+.i-stack--tight { gap: 8px; }
+.i-stack--loose { gap: 24px; }
+
+.i-row          { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.i-row--between { justify-content: space-between; }
+.i-row--baseline{ align-items: baseline; }
+
+.i-measure { max-width: var(--i-measure); }
+.i-grow    { flex: 1; min-width: 0; }
+
+.i-hidden { display: none !important; }
+
+/* Visível para leitor de tela, invisível na tela. */
+.i-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

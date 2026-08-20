@@ -1,0 +1,64 @@
+/* ---------- BOTÕES ----------
+   Três hierarquias, 44px, raio 2px. No máximo um primário por card.
+   Desabilitado é cor flat, nunca opacidade. Destrutivo só em modal.     */
+
+.i-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  height: var(--i-control-h);
+  padding: 0 22px;
+  border: none;
+  border-radius: var(--i-radius);
+  font: 600 15px var(--i-font-base);
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.i-btn--primary { background: var(--i-action); color: #fff; }
+.i-btn--primary:hover { background: var(--i-action-hover); color: #fff; }
+
+.i-btn--secondary {
+  border: 1px solid var(--i-action);
+  color: var(--i-action);
+  font-size: 14px;
+  padding: 0 18px;
+}
+.i-btn--secondary:hover { background: var(--i-action-tint); color: var(--i-action); }
+
+.i-btn--tertiary { color: var(--i-action); font-weight: 500; font-size: 14px; padding: 0 4px; }
+.i-btn--tertiary:hover { color: var(--i-action-hover); }
+
+.i-btn--danger { background: var(--i-err); color: #fff; }
+.i-btn--danger:hover { background: var(--i-err-hover); color: #fff; }
+
+/* Ação de apoio: barra do topo, linha de log, "tentar de novo". */
+.i-btn--sm {
+  height: var(--i-control-h-sm);
+  padding: 0 14px;
+  font: 500 13px var(--i-font-base);
+  border: 1px solid var(--i-border);
+  color: var(--i-body);
+}
+.i-btn--sm:hover { border-color: var(--i-action); color: var(--i-action); background: none; }
+
+.i-btn--block { width: 100%; }
+
+/* `:not(.is-loading)`: enquanto carrega o botão também fica disabled,
+   mas aí o fundo tem de continuar o mesmo — quem indica é o spinner. */
+.i-btn:disabled:not(.is-loading),
+.i-btn[aria-disabled="true"]:not(.is-loading) {
+  background: var(--i-disabled-bg);
+  color: var(--i-disabled-ink);
+  border: none;
+  cursor: not-allowed;
+}
+
+/* Carregando: o rótulo sai, o spinner entra, o fundo não muda —
+   o botão não deve pular de largura. O JS trava o min-width. */
+.i-btn.is-loading { cursor: wait; }
+.i-btn.is-loading .i-btn__label { display: none; }

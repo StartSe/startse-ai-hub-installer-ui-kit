@@ -1,0 +1,38 @@
+/* ---------- MODAL DE CONFIRMAÇÃO ----------
+   Só para ação irreversível ou que sobrescreve algo do aluno. O título
+   nomeia a consequência, nunca "Tem certeza?". Cancelar como terciário
+   à esquerda; confirmação destrutiva em vermelho à direita.             */
+
+.i-modal-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 50;
+}
+.i-modal-scrim[hidden] { display: none; }
+
+.i-modal {
+  background: var(--i-surface);
+  width: var(--i-modal-w);
+  max-width: 100%;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding: 28px 30px;
+}
+
+.i-modal__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+.i-modal__confirm { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Trava o scroll do fundo enquanto o modal está aberto (o JS aplica). */
+.i-scroll-lock { overflow: hidden; }

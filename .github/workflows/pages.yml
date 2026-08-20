@@ -1,0 +1,70 @@
+name: Publicar as docs no GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Só um deploy por vez; um push novo cancela o anterior em andamento.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Builda de novo em vez de confiar no dist/ commitado: o site sempre
+      # reflete o src/ deste commit.
+      - run: npm run build
+
+      # As docs referenciam ../dist/, então o site precisa da MESMA forma
+      # que o repo: docs/ e dist/ lado a lado. A raiz só redireciona.
+      - name: Montar o site
+        run: |
+          mkdir -p _site
+          cp -R docs _site/docs
+          cp -R dist _site/dist
+          touch _site/.nojekyll
+          cat > _site/index.html <<'HTML'
+          <!DOCTYPE html>
+          <html lang="pt-BR">
+          <head>
+            <meta charset="utf-8">
+            <title>Instaladores StartSe · UI Kit</title>
+            <meta http-equiv="refresh" content="0; url=./docs/">
+            <link rel="canonical" href="./docs/">
+          </head>
+          <body style="font-family:system-ui;padding:40px">
+            <p>Redirecionando para a <a href="./docs/">referência do UI Kit</a>.</p>
+          </body>
+          </html>
+          HTML
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

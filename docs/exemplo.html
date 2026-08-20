@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Instalar · Analista de Risco de Aplicações</title>
+
+<!-- Evita o flash de tema errado: aplica a escolha salva antes do CSS. -->
+<script>try{var t=localStorage.getItem('startse-ui-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Em produção: https://cdn.jsdelivr.net/gh/StartSe/startse-ai-hub-installer-ui-kit@v0.1.0/dist/startse-installer.min.css -->
+<link rel="stylesheet" href="../dist/startse-installer.css">
+</head>
+<body>
+
+<!-- ============ A · BARRA DO INSTALADOR ============ -->
+<header class="i-topbar">
+  <div class="i-topbar__in">
+    <div class="i-topbar__group">
+      <a class="i-topbar__back" href="./index.html"><span class="i-ico i-ico--back"></span>Voltar à solução</a>
+      <span class="i-topbar__sep"></span>
+      <b class="i-name">Analista de Risco de Aplicações</b>
+      <span class="i-tag i-tag--info">Instalador</span>
+    </div>
+    <div class="i-topbar__actions">
+      <span class="i-topbar__meta">10 workflows · 96 nós · roda na sua infra</span>
+      <button class="i-btn i-btn--sm" data-i-theme-toggle><span class="i-ico i-ico--eye"></span>Tema</button>
+      <button class="i-btn i-btn--sm"><span class="i-ico i-ico--down"></span>Baixar os arquivos</button>
+    </div>
+  </div>
+</header>
+
+<div class="i-shell">
+
+  <!-- ============ B · STEPPER ============ -->
+  <nav class="i-stepper" id="passos" data-i-stepper aria-label="Progresso da instalação">
+    <span class="i-label-caps i-stepper__title">Instalação em 3 passos</span>
+
+    <div class="i-step" data-i-step>
+      <span class="i-step__dot">1</span>
+      <div>
+        <b class="i-step__title">Instalar os workflows</b>
+        <span class="i-step__desc">No seu n8n, com as credenciais criadas na hora.</span>
+      </div>
+    </div>
+    <div class="i-step" data-i-step>
+      <span class="i-step__dot">2</span>
+      <div>
+        <b class="i-step__title">Criar o banco e a sua conta</b>
+        <span class="i-step__desc">Tabelas, regras de segurança e o administrador.</span>
+      </div>
+    </div>
+    <div class="i-step" data-i-step>
+      <span class="i-step__dot">3</span>
+      <div>
+        <b class="i-step__title">Conferir</b>
+        <span class="i-step__desc">Bate nos webhooks de verdade e testa o login.</span>
+      </div>
+    </div>
+
+    <div class="i-privacy">
+      <span class="i-label-caps">O que fazemos com os seus dados</span>
+      <p>Nada é gravado nos nossos servidores. Chaves e senhas existem só na memória enquanto a requisição roda.</p>
+    </div>
+  </nav>
+
+  <!-- ============ C · CONTEÚDO DO PASSO ============ -->
+  <div class="i-flow" id="conteudo">
+
+    <!-- Resumos dos passos concluídos entram aqui, em cima. -->
+    <div id="resumos" class="i-flow"></div>
+
+    <!-- PASSO 1 -->
+    <section class="i-card" id="passo-1">
+      <span class="i-eyebrow">Passo 1 de 3</span>
+      <h1 class="i-h-step">Instalar os workflows</h1>
+      <p class="i-body">Publica os 10 workflows no seu n8n e cria as credenciais na hora. Tudo roda na sua infraestrutura — a gente só orquestra a instalação.</p>
+
+      <div class="i-field">
+        <label class="i-field__label" for="n8n-url">Endereço do seu n8n</label>
+        <input class="i-field__input" id="n8n-url" type="url" placeholder="https://n8n.suaempresa.com" value="https://n8n.suaempresa.com">
+        <p class="i-field__help">É a URL que você abre no navegador para usar o n8n.</p>
+      </div>
+
+      <div class="i-field">
+        <label class="i-field__label" for="n8n-key">Chave da API do n8n</label>
+        <span class="i-field__wrap">
+          <input class="i-field__input" id="n8n-key" type="password" value="n8n_api_1a2b3c4d5e6f">
+          <button class="i-field__reveal" type="button" data-i-reveal aria-label="Mostrar o valor"><span class="i-ico i-ico--eye"></span></button>
+        </span>
+        <p class="i-field__help">Gere em Settings → n8n API. Usada só nesta instalação, nunca gravada.</p>
+      </div>
+
+      <label class="i-check" style="margin-top:22px;">
+        <input type="checkbox" id="self-signed">
+        <span>Certificado próprio (autoassinado)<small>Marque se a conexão falhar. A conexão continua criptografada.</small></span>
+      </label>
+
+      <div class="i-card__actions">
+        <button class="i-btn i-btn--primary" id="btn-1">Instalar os workflows</button>
+        <button class="i-btn i-btn--tertiary">Prefiro importar na mão</button>
+      </div>
+
+      <div id="log-1" style="margin-top:24px;"></div>
+    </section>
+
+    <!-- PASSO 2 -->
+    <section class="i-card i-hidden" id="passo-2">
+      <span class="i-eyebrow">Passo 2 de 3</span>
+      <h1 class="i-h-step">Criar o banco e a sua conta</h1>
+      <p class="i-body">Cria as tabelas, as 36 regras de segurança e a conta do administrador. Nenhum dado de exemplo.</p>
+
+      <div class="i-field">
+        <label class="i-field__label" for="empresa">Nome da empresa</label>
+        <input class="i-field__input" id="empresa" placeholder="Sua Empresa S.A." value="Sua Empresa S.A.">
+        <p class="i-field__help">Dele sai o identificador da instalação.</p>
+      </div>
+
+      <div class="i-field-pair">
+        <div class="i-field">
+          <label class="i-field__label" for="email">Seu e-mail</label>
+          <input class="i-field__input" id="email" type="email" value="renata@suaempresa.com">
+        </div>
+        <div class="i-field">
+          <label class="i-field__label" for="senha">Senha provisória</label>
+          <input class="i-field__input" id="senha" type="password" value="trocar-no-primeiro-acesso">
+        </div>
+      </div>
+      <p class="i-field__help">Mínimo de 10 caracteres. O primeiro acesso exige a troca.</p>
+
+      <div class="i-card__actions">
+        <button class="i-btn i-btn--primary" id="btn-2">Criar o banco e a conta</button>
+      </div>
+
+      <div id="log-2" style="margin-top:24px;"></div>
+    </section>
+
+    <!-- PASSO 3 -->
+    <section class="i-card i-hidden" id="passo-3">
+      <span class="i-eyebrow">Passo 3 de 3</span>
+      <h1 class="i-h-step">Conferir a instalação</h1>
+      <p class="i-body">Bate nos 10 webhooks de verdade e faz um login de teste. Só depois disso a gente diz que está pronto.</p>
+
+      <div class="i-card__actions">
+        <button class="i-btn i-btn--primary" id="btn-3">Conferir agora</button>
+      </div>
+
+      <div id="prog-3" data-i-progress data-i-progress-label="Conferindo os webhooks" class="i-hidden" style="margin-top:24px;"></div>
+      <div id="log-3" style="margin-top:16px;"></div>
+    </section>
+
+    <!-- CONCLUSÃO -->
+    <section class="i-hidden" id="final"></section>
+  </div>
+</div>
+
+<!-- Em produção: https://cdn.jsdelivr.net/gh/StartSe/startse-ai-hub-installer-ui-kit@v0.1.0/dist/startse-installer.min.js -->
+<script src="../dist/startse-installer.js"></script>
+<script>
+/* ============================================================
+   Gabarito de instalador. As funções `fake*` são o único ponto
+   que você troca por chamadas de verdade — o resto da mecânica
+   (passos, log, resumos, conclusão) é o padrão de todo instalador.
+   ============================================================ */
+
+const passos = StartSeUI.stepper('#passos')
+const resumos = document.querySelector('#resumos')
+const espera = (ms) => new Promise((r) => setTimeout(r, ms))
+
+/** Resumo de passo concluído: título + os números que provam o resultado. */
+function concluir(titulo, numeros) {
+  const box = document.createElement('div')
+  box.className = 'i-summary'
+  box.innerHTML =
+    '<span class="i-badge-check"><span class="i-ico i-ico--check i-ico--sm"></span></span>' +
+    '<div><b class="i-name"></b><span class="i-summary__meta"></span></div>'
+  box.querySelector('.i-name').textContent = titulo
+  box.querySelector('.i-summary__meta').textContent = numeros
+  resumos.append(box)
+}
+
+function trocarPasso(de, para) {
+  document.querySelector(`#passo-${de}`).classList.add('i-hidden')
+  const proximo = document.querySelector(`#passo-${para}`)
+  proximo.classList.remove('i-hidden')
+  passos.active(para)
+  proximo.scrollIntoView({ behavior: 'smooth', block: 'center' })
+}
+
+/* ---------- PASSO 1 ---------- */
+
+const log1 = StartSeUI.runLog('#log-1')
+const btn1 = StartSeUI.button('#btn-1')
+
+async function instalarWorkflows() {
+  const url = document.querySelector('#n8n-url').value.trim()
+  const campoUrl = document.querySelector('#n8n-url').closest('.i-field')
+
+  if (!url.startsWith('http')) {
+    campoUrl.classList.add('i-field--error')
+    campoUrl.querySelector('.i-field__help').textContent =
+      'Precisa começar com https:// — é o endereço completo, como você abre no navegador.'
+    return
+  }
+  campoUrl.classList.remove('i-field--error')
+
+  btn1.loading(true)
+  log1.clear().start('Publicando os workflows — leva alguns segundos.')
+
+  try {
+    await espera(900)
+    log1.ok('Conectando ao seu n8n', 'versão 1.63 · API ok')
+
+    await espera(800)
+    log1.ok('Criando a credencial do Postgres', 'pooler · ssl')
+
+    await espera(1100)
+    const conflitos = 3
+    if (conflitos) {
+      log1.stop()
+      const escolha = await StartSeUI.modal.confirm({
+        title: `Isso vai sobrescrever ${conflitos} workflows existentes`,
+        text: 'Encontramos workflows com o mesmo nome no seu n8n. Sobrescrever apaga as alterações que você fez neles.',
+        confirm: 'Sobrescrever',
+        alternative: 'Manter os meus',
+        danger: true,
+      })
+      if (escolha === false) {
+        log1.fail('Publicando 10 workflows', {
+          error: 'Cancelado por você. Nada foi alterado no seu n8n.',
+          retry: instalarWorkflows,
+          retryLabel: 'Começar de novo',
+        })
+        return
+      }
+      log1.start('Publicando os workflows — leva alguns segundos.')
+      await espera(900)
+    }
+
+    log1.ok('Publicando 10 workflows', '10 criados · 10 ativos')
+    await espera(500)
+    log1.warn('Chave do OpenRouter ausente', 'parecer sai pelo resumo determinístico')
+
+    log1.stop()
+    concluir('Workflows instalados no seu n8n', '10 criados · 10 ativos · webhooks em n8n.suaempresa.com/webhook')
+    trocarPasso(1, 2)
+  } catch (erro) {
+    log1.fail('Publicando os workflows', {
+      error: erro.message || 'A API não respondeu em 10s. Confira se o n8n está no ar e tente de novo.',
+      retry: instalarWorkflows,
+    })
+  } finally {
+    btn1.loading(false)
+  }
+}
+document.querySelector('#btn-1').addEventListener('click', instalarWorkflows)
+
+/* ---------- PASSO 2 ---------- */
+
+const log2 = StartSeUI.runLog('#log-2')
+const btn2 = StartSeUI.button('#btn-2')
+
+async function criarBanco() {
+  btn2.loading(true)
+  log2.clear().start('Criando as tabelas — leva menos de um minuto.')
+
+  try {
+    await espera(1000)
+    log2.ok('Criando 14 tabelas', '212 ms')
+    await espera(900)
+    log2.ok('Aplicando 36 regras de segurança', 'row level security')
+    await espera(700)
+    log2.ok('Criando a conta do administrador', document.querySelector('#email').value)
+
+    log2.stop()
+
+    // Cartão de acesso: aparece uma vez, avisando que some.
+    const acesso = document.createElement('div')
+    acesso.className = 'i-access'
+    acesso.innerHTML =
+      '<div class="i-access__head"><span class="i-access__label">Seu acesso — anote agora</span>' +
+      '<span class="i-access__hint">some ao sair desta tela</span></div>' +
+      '<div class="i-access__grid"><span class="i-access__key">Usuário</span>' +
+      '<span class="i-access__val"></span><span class="i-access__key">Senha</span>' +
+      '<span class="i-access__note">a que você digitou — provisória, troca no 1º acesso</span></div>'
+    acesso.querySelector('.i-access__val').textContent = document.querySelector('#email').value
+    resumos.append(acesso)
+
+    concluir('Banco e conta criados', '14 tabelas · 36 regras · 1 administrador')
+    trocarPasso(2, 3)
+  } catch (erro) {
+    log2.fail('Criando as tabelas', { error: erro.message, retry: criarBanco })
+  } finally {
+    btn2.loading(false)
+  }
+}
+document.querySelector('#btn-2').addEventListener('click', criarBanco)
+
+/* ---------- PASSO 3 · a verificação que libera o CTA ---------- */
+
+const log3 = StartSeUI.runLog('#log-3')
+const btn3 = StartSeUI.button('#btn-3')
+const prog3 = StartSeUI.progress('#prog-3')
+
+async function conferir() {
+  btn3.loading(true)
+  document.querySelector('#prog-3').classList.remove('i-hidden')
+  log3.clear()
+
+  try {
+    for (let i = 1; i <= 10; i++) {
+      prog3.set(i, 10)
+      await espera(220)
+    }
+    log3.ok('10 webhooks responderam', 'média 180 ms')
+    await espera(600)
+    log3.ok('Login de teste', 'ok · senha provisória aceita')
+
+    document.querySelector('#passo-3').classList.add('i-hidden')
+    passos.done()
+
+    const final = document.querySelector('#final')
+    final.className = 'i-done'
+    final.innerHTML =
+      '<h2 class="i-h-block">Instalação conferida. Pode usar.</h2>' +
+      '<p class="i-body" style="margin:0 0 16px;">Os 10 webhooks responderam e o login funcionou. ' +
+      'Apague a chave da API do n8n — ela já não é necessária.</p>' +
+      '<div class="i-row"><button class="i-btn i-btn--primary">Abrir a aplicação' +
+      '<span class="i-ico i-ico--out"></span></button>' +
+      '<button class="i-btn i-btn--secondary">Voltar à solução</button></div>'
+    final.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  } catch (erro) {
+    log3.fail('Conferindo a instalação', { error: erro.message, retry: conferir })
+  } finally {
+    btn3.loading(false)
+  }
+}
+document.querySelector('#btn-3').addEventListener('click', conferir)
+</script>
+</body>
+</html>

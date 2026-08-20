@@ -1,0 +1,33 @@
+/* ---------- SPINNER E PROGRESSO ----------
+   Progresso só quando o total é conhecido. Sem total, spinner — nunca
+   uma porcentagem inventada.                                            */
+
+.i-spinner {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--i-spinner-track);
+  border-top-color: var(--i-action);
+  border-radius: 50%;
+  animation: i-gira .7s linear infinite;
+  flex-shrink: 0;
+}
+
+/* Sobre o azul do primário a trilha precisa clarear. */
+.i-btn--primary .i-spinner,
+.i-btn--danger .i-spinner {
+  border-color: var(--i-navy-label);
+  border-top-color: #fff;
+}
+
+.i-progress { height: 4px; background: var(--i-border-soft); }
+.i-progress__bar { height: 4px; width: 0; background: var(--i-action); transition: width .2s ease-out; }
+
+.i-progress__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.i-progress__label { font: 500 13.5px var(--i-font-base); color: var(--i-body); }

@@ -1,0 +1,28 @@
+{
+  "name": "@startse/ai-hub-installer-ui-kit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "UI Kit dos instaladores StartSe — CSS e JS servidos por CDN para padronizar as páginas de instalação das soluções.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "files": ["dist"],
+  "exports": {
+    ".": "./dist/startse-installer.esm.js",
+    "./css": "./dist/startse-installer.css",
+    "./tokens": "./dist/tokens.json"
+  },
+  "scripts": {
+    "build": "node build/build.mjs",
+    "watch": "node build/build.mjs --watch",
+    "dev": "node build/build.mjs --watch --serve",
+    "check": "node build/check-dist.mjs"
+  },
+  "devDependencies": {
+    "browserslist": "^4.24.0",
+    "esbuild": "^0.25.0",
+    "lightningcss": "^1.30.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

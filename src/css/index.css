@@ -1,0 +1,23 @@
+/* Entrada do bundle CSS. O bloco de tokens é injetado no topo pelo
+   build, a partir de src/tokens/tokens.json — não há @import dele aqui.
+
+   A ordem importa: base → tipografia → ícones → componentes → layout →
+   utilitários (últimos, para vencerem por ordem sem precisar de
+   !important).                                                          */
+
+@import "./base.css";
+@import "./typography.css";
+@import "./icons.css";
+
+@import "./components/buttons.css";
+@import "./components/feedback.css";
+@import "./components/fields.css";
+@import "./components/surfaces.css";
+@import "./components/stepper.css";
+@import "./components/runlog.css";
+@import "./components/tags.css";
+@import "./components/data.css";
+@import "./components/modal.css";
+
+@import "./layout.css";
+@import "./utilities.css";

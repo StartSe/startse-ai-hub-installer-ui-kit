@@ -1,0 +1,28 @@
+/* ---------- TIPOGRAFIA ----------
+   Barlow só em título; todo o resto é IBM Plex Sans; todo valor técnico
+   (URL, id, métrica, contagem) é mono. ALL CAPS só em eyebrow e tag.    */
+
+.i-eyebrow {
+  display: block;
+  font: 500 11px var(--i-font-base);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--i-action);
+}
+
+.i-h-page  { font: 600 40px/1.1 var(--i-font-display); color: var(--i-ink); margin: 12px 0 10px; }
+.i-h-step  { font: 600 26px/1.15 var(--i-font-display); color: var(--i-ink); margin: 10px 0 6px; }
+.i-h-block { font: 600 22px/1.15 var(--i-font-display); color: var(--i-ink); margin: 0 0 6px; }
+
+.i-name { font: 600 15px var(--i-font-base); color: var(--i-ink); }
+.i-body { font: 400 14px/1.6 var(--i-font-base); color: var(--i-body); max-width: var(--i-measure); }
+.i-help { font: 400 12px var(--i-font-base); color: var(--i-muted); }
+.i-mono { font: 400 12px var(--i-font-mono); color: var(--i-muted); }
+
+.i-label-caps {
+  display: block;
+  font: 500 11px var(--i-font-base);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--i-muted);
+}

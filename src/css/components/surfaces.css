@@ -1,0 +1,82 @@
+/* ---------- SUPERFÍCIES ----------
+   Sombra zero em tudo. Hierarquia por cor e borda, nunca por elevação.
+   Acento é border-top 2px — nunca border-left.                          */
+
+/* Card de passo: o contêiner de tudo que o passo pede. Um por tela. */
+.i-card {
+  background: var(--i-surface);
+  border: 1px solid var(--i-border);
+  padding: var(--i-card-pad-y) var(--i-card-pad-x);
+}
+.i-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+/* Resumo de passo concluído: substitui o card quando o passo termina.
+   Badge teal + título + os números que provam o resultado. */
+.i-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--i-surface);
+  border: 1px solid var(--i-border);
+  padding: 15px 20px;
+}
+.i-summary__meta { display: block; font-size: 12.5px; color: var(--i-muted); margin-top: 2px; line-height: 1.5; }
+
+.i-badge-check {
+  width: 24px;
+  height: 24px;
+  background: var(--i-ok);
+  color: var(--i-check-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Alertas. Aviso é condição degradada que não bloqueia; erro sempre
+   termina com a próxima ação. */
+.i-alert { border-top: 2px solid; padding: 14px 18px; }
+.i-alert__title { display: block; font: 600 14px var(--i-font-base); color: var(--i-ink); }
+.i-alert__text { display: block; font-size: 13.5px; color: var(--i-body); margin-top: 2px; line-height: 1.55; }
+.i-alert--info  { border-color: var(--i-action); background: var(--i-action-bg); }
+.i-alert--warn  { border-color: var(--i-warn);   background: var(--i-warn-bg); }
+.i-alert--error { border-color: var(--i-err);    background: var(--i-err-bg); }
+
+/* Conclusão: só depois da verificação de verdade. */
+.i-done {
+  border-top: 2px solid var(--i-ok);
+  background: var(--i-ok-bg);
+  padding: 22px 24px;
+}
+
+/* Cartão de acesso: navy, valores em mono, sempre avisando que some. */
+.i-access {
+  background: var(--i-navy);
+  border: 1px solid var(--i-navy-border);
+  color: #fff;
+  padding: 20px 24px;
+}
+.i-access__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.i-access__label {
+  font: 500 11px var(--i-font-base);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--i-navy-label);
+}
+.i-access__hint { font-size: 12px; color: var(--i-navy-muted); }
+.i-access__grid { display: grid; grid-template-columns: auto 1fr; gap: 8px 24px; align-items: baseline; }
+.i-access__key { font-size: 12.5px; color: var(--i-navy-label); }
+.i-access__val { font: 400 14px var(--i-font-mono); word-break: break-all; }
+.i-access__note { font-size: 13.5px; color: var(--i-navy-body); }

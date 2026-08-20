@@ -1,0 +1,73 @@
+/* ---------- ESTRUTURA DA TELA ----------
+   Takeover com três regiões fixas: barra sticky 60px, stepper 290px e
+   conteúdo fluido. Máx. 1200px. Um passo visível por vez.               */
+
+.i-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--i-surface);
+  border-bottom: 1px solid var(--i-border);
+}
+.i-topbar__in {
+  max-width: var(--i-shell-max);
+  margin: 0 auto;
+  height: var(--i-topbar-h);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+/* A barra tem altura fixa: nada aqui pode quebrar linha. O que não
+   couber trunca (o nome da solução) ou some no breakpoint (o resumo do
+   pacote) — as ações nunca encolhem. */
+.i-topbar__group { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.i-topbar__back { display: inline-flex; align-items: center; gap: 8px; font: 500 14px var(--i-font-base); white-space: nowrap; flex-shrink: 0; }
+.i-topbar__sep { width: 1px; height: 18px; background: var(--i-border); flex-shrink: 0; }
+.i-topbar__meta { font-size: 12.5px; color: var(--i-muted); white-space: nowrap; }
+
+/* Nome longo de solução vira reticências em vez de empurrar a barra. */
+.i-topbar__group > .i-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.i-topbar__group > .i-tag { flex-shrink: 0; }
+
+.i-topbar__actions { display: flex; align-items: center; gap: 16px; flex-shrink: 0; flex-wrap: nowrap; }
+/* Defensivo: .i-row é wrap por padrão e dentro da barra isso quebraria. */
+.i-topbar__in > .i-row { flex-wrap: nowrap; flex-shrink: 0; }
+
+.i-shell {
+  max-width: var(--i-shell-max);
+  margin: 0 auto;
+  padding: 36px 32px 90px;
+  display: grid;
+  grid-template-columns: var(--i-shell-aside) minmax(0, 1fr);
+  gap: var(--i-shell-gap);
+  align-items: start;
+}
+
+/* O stepper acompanha a rolagem em telas altas. */
+.i-shell > .i-stepper { position: sticky; top: calc(var(--i-topbar-h) + 24px); }
+
+/* Empilhamento vertical do conteúdo do passo: resumos em cima,
+   card ativo embaixo. */
+.i-flow { display: flex; flex-direction: column; gap: 14px; }
+
+/* O resumo do pacote é o primeiro a sair: é informação de apoio, e sem
+   ele o nome da solução e as ações ainda cabem. */
+@media (max-width: 1080px) {
+  .i-topbar__meta { display: none; }
+}
+
+@media (max-width: 900px) {
+  .i-shell {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding: 24px 20px 64px;
+  }
+  .i-shell > .i-stepper { position: static; }
+  .i-topbar__in { padding: 0 20px; }
+}
+
+@media (max-width: 620px) {
+  .i-card { padding: 24px 20px; }
+}

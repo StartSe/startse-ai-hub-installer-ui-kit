@@ -1,0 +1,75 @@
+/* ---------- CAMPO COPIÁVEL, TABELA E CARDS DE OPÇÃO ---------- */
+
+/* Para valores que o aluno leva para outra ferramenta: webhook, id,
+   comando. O botão vira "Copiado" por 2s (comportamento no JS). */
+.i-copy { display: flex; align-items: stretch; border: 1px solid var(--i-border); }
+.i-copy code {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  background: var(--i-canvas);
+  padding: 10px 14px;
+  font: 400 13px var(--i-font-mono);
+  color: var(--i-body);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.i-copy button {
+  background: var(--i-surface);
+  border: none;
+  border-left: 1px solid var(--i-border);
+  padding: 10px 16px;
+  font: 600 13px var(--i-font-base);
+  color: var(--i-action);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.i-copy button:hover { background: var(--i-action-tint); }
+
+/* Inventário do que foi criado. Sem zebra, sem borda externa. */
+.i-table { width: 100%; border-collapse: collapse; }
+.i-table th {
+  text-align: left;
+  padding: 0 24px 8px 0;
+  font: 500 11px var(--i-font-base);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--i-muted);
+  white-space: nowrap;
+}
+.i-table td {
+  padding: 10px 24px 10px 0;
+  border-top: 1px solid var(--i-border-soft);
+  font-size: 14px;
+  color: var(--i-ink);
+  vertical-align: baseline;
+}
+.i-table td:last-child, .i-table th:last-child { padding-right: 0; }
+
+/* Escolha única que precisa de descrição e consequência.
+   Nunca dropdown para menos de 4 opções. */
+.i-option {
+  display: block;
+  border: 1px solid var(--i-border);
+  background: var(--i-surface);
+  padding: 15px 17px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font: inherit;
+}
+.i-option:hover { border-color: var(--i-action); }
+.i-option--selected,
+.i-option[aria-checked="true"] {
+  border: 2px solid var(--i-action);
+  background: var(--i-action-bg);
+  padding: 14px 16px;
+}
+.i-option__title { display: block; font: 600 14px var(--i-font-base); color: var(--i-ink); }
+.i-option--selected .i-option__title,
+.i-option[aria-checked="true"] .i-option__title { color: var(--i-action-hover); }
+.i-option__desc { display: block; font-size: 12.5px; color: var(--i-muted); margin-top: 2px; line-height: 1.45; }
+.i-option--selected .i-option__desc,
+.i-option[aria-checked="true"] .i-option__desc { color: var(--i-body); }

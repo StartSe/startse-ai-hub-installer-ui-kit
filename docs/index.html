@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Instaladores StartSe · UI Kit</title>
+<script>try{var t=localStorage.getItem('startse-ui-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../dist/startse-installer.css">
+<link rel="stylesheet" href="./docs.css">
+</head>
+<body>
+
+<header class="doc-hero">
+  <div class="doc-hero__in">
+    <span class="i-eyebrow" style="color:#99CCF8;">StartSe · AI Action</span>
+    <h1>UI Kit dos Instaladores</h1>
+    <p>Linguagem visual compartilhada para todo instalador de solução. Ponha duas tags na sua página, use as classes <code>.i-*</code> e o instalador já sai padronizado — light e dark inclusos.</p>
+    <div class="doc-hero__badges">
+      <span class="doc-hero__v" data-version>v0.1.0</span>
+      <span class="doc-hero__note">Base: StartSe Design System</span>
+      <span class="doc-hero__pipe"></span>
+      <span class="doc-hero__note">Barlow + IBM Plex Sans</span>
+      <span class="doc-hero__pipe"></span>
+      <a class="doc-hero__note" href="https://github.com/StartSe/startse-ai-hub-installer-ui-kit" style="color:#99CCF8;">Repositório</a>
+      <span class="doc-hero__pipe"></span>
+      <button id="theme-toggle" class="i-btn i-btn--sm" data-i-theme-toggle style="background:#161616; border-color:#2E2E2E; color:#fff;"><span>Alternar para dark</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="doc-nav">
+  <div class="doc-nav__in">
+    <a href="#usar">Como usar</a>
+    <a href="#tokens">Tokens</a>
+    <a href="#estrutura">Estrutura</a>
+    <a href="#componentes">Componentes</a>
+    <a href="#comportamentos">Comportamentos</a>
+    <a href="#api">API JS</a>
+    <a href="#voz">Voz</a>
+    <a href="./exemplo.html">Exemplo completo →</a>
+  </div>
+</nav>
+
+<main class="doc-main" style="padding-bottom:100px;">
+
+  <!-- ============ COMO USAR ============ -->
+  <section class="doc-section" id="usar">
+    <h2 class="doc-h2">Como usar</h2>
+    <p class="doc-lede">Duas tags no <code>&lt;head&gt;</code>, uma no fim do <code>&lt;body&gt;</code>. Nenhum build, nenhuma dependência. A versão fica travada na URL: o que você publicou hoje continua idêntico daqui a um ano.</p>
+
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Instalação</h3>
+        <p>Troque <code style="display:inline; margin:0;">v0.1.0</code> pela versão que você quer fixar. As fontes vêm do Google Fonts — o kit não as embute.</p>
+        <code>min.css 20 kB · min.js 11 kB<br>≈ 9 kB somados, com gzip</code>
+      </div>
+      <div class="doc-spec__demo">
+        <div class="i-stack">
+          <div>
+            <span class="i-label-caps">No &lt;head&gt;</span>
+            <div class="i-copy" style="margin-top:8px;">
+              <code data-i-copy-source>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/StartSe/startse-ai-hub-installer-ui-kit@v0.1.0/dist/startse-installer.min.css"&gt;</code>
+              <button type="button" data-i-copy>Copiar</button>
+            </div>
+          </div>
+          <div>
+            <span class="i-label-caps">Antes do &lt;/body&gt;</span>
+            <div class="i-copy" style="margin-top:8px;">
+              <code data-i-copy-source>&lt;script src="https://cdn.jsdelivr.net/gh/StartSe/startse-ai-hub-installer-ui-kit@v0.1.0/dist/startse-installer.min.js"&gt;&lt;/script&gt;</code>
+              <button type="button" data-i-copy>Copiar</button>
+            </div>
+          </div>
+          <div class="i-alert i-alert--info">
+            <b class="i-alert__title">As fontes são pré-requisito</b>
+            <span class="i-alert__text">Sem o Barlow e o IBM Plex Sans a tela cai no system-ui e perde a identidade. Copie a tag de fontes do exemplo completo.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TOKENS ============ -->
+  <section class="doc-section" id="tokens">
+    <h2 class="doc-h2">Tokens</h2>
+    <p class="doc-lede">Subconjunto do DS StartSe que um instalador pode usar. Nada fora desta paleta. Todo valor é uma custom property — <code>var(--i-action)</code>, nunca <code>#0066BE</code> —, e é por isso que o tema inteiro troca com um atributo.</p>
+
+    <span class="i-label-caps" style="margin-bottom:12px;">Light</span>
+    <div class="doc-swatches" id="swatches-light"></div>
+
+    <span class="i-label-caps" style="margin:28px 0 12px;">Dark — só o que muda</span>
+    <p class="doc-lede" style="margin-bottom:16px;">O dark é um patch: redefine superfícies, tinta e ação, e mantém o matiz das cores semânticas trocando apenas o fundo por um tint escuro. Três regras: a ação vira o pure <code>#0080ED</code> e <b>clareia</b> no hover em vez de escurecer; sombra continua zero; profundidade é borda, nunca elevação.</p>
+    <div class="doc-swatches" id="swatches-dark"></div>
+
+    <div class="doc-two">
+      <div class="doc-panel">
+        <span class="doc-panel__title">Tipografia</span>
+        <div class="i-stack">
+          <div><span class="i-eyebrow">Passo 1 de 3</span><span class="i-mono">.i-eyebrow · Plex 500 11 · caps · tracking .14em</span></div>
+          <div><span class="i-h-step" style="margin:0;">Título do passo</span><span class="i-mono">.i-h-step · Barlow 600 26</span></div>
+          <div><span class="i-name">Nome de item ou resumo</span><br><span class="i-mono">.i-name · Plex 600 15</span></div>
+          <div><span class="i-body">Corpo explicativo, máx. 60ch por linha.</span><span class="i-mono">.i-body · Plex 400 14 · lh 1.6</span></div>
+          <div><span class="i-help">Rótulo de campo e texto de ajuda.</span><br><span class="i-mono">.i-help · Plex 400 12</span></div>
+          <div><span class="i-mono" style="color:var(--i-ink); font-size:13px;">n8n.suaempresa.com · 212 ms · 14 tabelas</span><span class="i-mono">.i-mono · todo valor técnico: URL, id, métrica</span></div>
+        </div>
+      </div>
+      <div class="doc-panel">
+        <span class="doc-panel__title">Forma e espaço</span>
+        <table class="i-table">
+          <tbody>
+            <tr><td class="i-mono" style="white-space:nowrap;">--i-radius</td><td>2px, só em botões e chips. Cards, inputs e tags: raio zero.</td></tr>
+            <tr><td class="i-mono">--i-control-h</td><td>44px em botão e campo de ação. Ação de apoio: 36px.</td></tr>
+            <tr><td class="i-mono">--i-topbar-h</td><td>60px na barra do instalador, sticky.</td></tr>
+            <tr><td class="i-mono">--i-card-pad-*</td><td>30px vertical, 34px horizontal no card de passo.</td></tr>
+            <tr><td class="i-mono">--i-shell-*</td><td>stepper 290px + conteúdo fluido, gap 44px, máx. 1200px.</td></tr>
+            <tr><td class="i-mono">borda 1px</td><td><code>--i-border</code> em todo card. Acento: border-top 2px, nunca border-left.</td></tr>
+            <tr><td class="i-mono">sombra</td><td>Nenhuma, em nenhum estado. Hierarquia por cor e borda.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ESTRUTURA ============ -->
+  <section class="doc-section" id="estrutura">
+    <h2 class="doc-h2">Estrutura da tela</h2>
+    <p class="doc-lede">Todo instalador é um takeover com três regiões fixas. O conteúdo do passo é a única parte que varia entre instaladores.</p>
+
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>.i-topbar + .i-shell</h3>
+        <p>Barra sticky de 60px, grid de 290px (stepper) e conteúdo fluido. Abaixo de 900px o grid vira coluna única e o stepper para de ser sticky.</p>
+        <code>.i-topbar · .i-topbar__in<br>.i-shell · .i-stepper · .i-flow</code>
+      </div>
+      <div class="doc-spec__demo doc-spec__demo--wide">
+        <div class="i-stack i-stack--tight" style="min-width:0;">
+          <span><b class="i-name">Um passo por vez.</b> <span class="i-body" style="display:inline;">Passo futuro não aparece no conteúdo; passo concluído colapsa em <code>.i-summary</code> com os números que provam o resultado.</span></span>
+          <span><b class="i-name">Todo passo termina em verificação.</b> <span class="i-body" style="display:inline;">O último passo confere a instalação de verdade — webhook, login — antes de liberar o CTA final.</span></span>
+          <span><b class="i-name">Privacidade sempre visível.</b> <span class="i-body" style="display:inline;">A nota "o que fazemos com os seus dados" mora no stepper (<code>.i-privacy</code>), não no rodapé.</span></span>
+        </div>
+        <template data-demo>
+          <div class="i-topbar" style="position:static;">
+            <div class="i-topbar__in">
+              <div class="i-topbar__group">
+                <a class="i-topbar__back" href="#"><span class="i-ico i-ico--back"></span>Voltar à solução</a>
+                <span class="i-topbar__sep"></span>
+                <b class="i-name">Nome da solução</b>
+                <span class="i-tag i-tag--info">Instalador</span>
+              </div>
+              <div class="i-topbar__actions">
+                <span class="i-topbar__meta">10 workflows · 96 nós · roda na sua infra</span>
+                <button class="i-btn i-btn--sm"><span class="i-ico i-ico--down"></span>Baixar os arquivos</button>
+              </div>
+            </div>
+          </div>
+          <div class="i-shell" style="padding:24px 0 0;">
+            <nav class="i-stepper">
+              <span class="i-label-caps i-stepper__title">Instalação em 3 passos</span>
+              <div class="i-step i-step--done"><span class="i-step__dot"><span class="i-ico i-ico--check i-ico--sm"></span></span><div><b class="i-step__title">Instalar os workflows</b><span class="i-step__desc">No seu n8n, com credenciais criadas na hora.</span></div></div>
+              <div class="i-step i-step--active"><span class="i-step__dot">2</span><div><b class="i-step__title">Criar o banco e a sua conta</b><span class="i-step__desc">Tabelas, regras de segurança, administrador.</span></div></div>
+              <div class="i-step i-step--future"><span class="i-step__dot">3</span><div><b class="i-step__title">Conferir</b><span class="i-step__desc">Bate nos webhooks e testa o login.</span></div></div>
+              <div class="i-privacy">
+                <span class="i-label-caps">O que fazemos com os seus dados</span>
+                <p>Nada é gravado nos nossos servidores. Chaves e senhas existem só na memória enquanto a requisição roda.</p>
+              </div>
+            </nav>
+            <div class="i-flow">
+              <div class="i-summary">
+                <span class="i-badge-check"><span class="i-ico i-ico--check i-ico--sm"></span></span>
+                <div><b class="i-name">Workflows instalados no seu n8n</b><span class="i-summary__meta">10 criados · 10 ativos</span></div>
+              </div>
+              <div class="i-card">
+                <span class="i-eyebrow">Passo 2 de 3</span>
+                <h2 class="i-h-step">Criar o banco e a sua conta</h2>
+                <p class="i-body">Cria as tabelas, as 36 regras de segurança e a conta do administrador.</p>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPONENTES ============ -->
+  <section class="doc-section" id="componentes">
+    <h2 class="doc-h2">Componentes</h2>
+    <p class="doc-lede">Especificação à esquerda, exemplo vivo à direita, HTML exato embaixo — o snippet é gerado a partir do mesmo markup que está rodando ali, então nunca sai de sincronia.</p>
+
+    <!-- Botões -->
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Botões</h3>
+        <p>Três hierarquias, 44px, raio 2px. No máximo um primário por card. Desabilitado é cor flat, nunca opacidade. Carregando troca o rótulo pelo spinner sem mudar o fundo nem a largura. Destrutivo só dentro de modal de confirmação.</p>
+        <code>.i-btn--primary · --secondary<br>--tertiary · --danger · --sm<br>:disabled · .is-loading</code>
+      </div>
+      <div class="doc-spec__demo">
+        <template data-demo>
+          <div class="i-row">
+            <button class="i-btn i-btn--primary">Primário</button>
+            <button class="i-btn i-btn--secondary">Secundário</button>
+            <button class="i-btn i-btn--tertiary">Terciário</button>
+            <button class="i-btn i-btn--primary" disabled>Desabilitado</button>
+            <button class="i-btn i-btn--primary" id="demo-loading">Clique para carregar</button>
+            <button class="i-btn i-btn--danger">Destrutivo</button>
+            <button class="i-btn i-btn--sm">Ação de apoio</button>
+            <button class="i-btn i-btn--primary">Abrir a aplicação<span class="i-ico i-ico--out"></span></button>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- Campos -->
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Campos</h3>
+        <p>Underline do DS: rótulo em cima, linha 1px embaixo, ajuda abaixo. Nunca caixa com borda. Foco engrossa para 2px na cor de ação. Erro troca linha e ajuda, e o texto diz o que falhou <b>e</b> como corrigir. Segredo é sempre <code style="display:inline; margin:0;">type="password"</code>.</p>
+        <code>.i-field · .i-field__label<br>.i-field__input · .i-field__help<br>.i-field--error · .i-field__wrap</code>
+      </div>
+      <div class="doc-spec__demo">
+        <template data-demo>
+          <div class="i-field-pair">
+            <div class="i-field">
+              <label class="i-field__label" for="d-n8n">Endereço do seu n8n</label>
+              <input class="i-field__input" id="d-n8n" placeholder="https://n8n.suaempresa.com">
+              <p class="i-field__help">O endereço onde você abre o n8n.</p>
+            </div>
+            <div class="i-field i-field--error">
+              <label class="i-field__label" for="d-err">Conexão do banco</label>
+              <input class="i-field__input" id="d-err" value="postgres://errado">
+              <p class="i-field__help">Faltou a porta. No Supabase, use a conexão do pooler (porta 6543).</p>
+            </div>
+            <div class="i-field">
+              <label class="i-field__label" for="d-key">Chave da API</label>
+              <span class="i-field__wrap">
+                <input class="i-field__input" id="d-key" type="password" value="n8n_api_1a2b3c4d5e">
+                <button class="i-field__reveal" type="button" data-i-reveal aria-label="Mostrar o valor"><span class="i-ico i-ico--eye"></span></button>
+              </span>
+              <p class="i-field__help">Usada só na requisição, nunca gravada.</p>
+            </div>
+            <div class="i-field">
+              <label class="i-field__label" for="d-modelo">Modelo das lentes de análise</label>
+              <span class="i-select">
+                <select class="i-field__input" id="d-modelo">
+                  <option>automático (recomendado)</option>
+                  <option>claude-sonnet-4</option>
+                  <option>gpt-5-mini</option>
+                  <option>gemini-2.5-flash</option>
+                </select>
+              </span>
+              <p class="i-field__help">Dá para trocar depois sem reinstalar.</p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- Escolha -->
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Escolha única</h3>
+        <p>Radio para 2–3 opções curtas; card de opção quando a escolha precisa de descrição e consequência. Nunca dropdown para menos de 4 opções. A opção recomendada vem primeiro e diz que é a recomendada.</p>
+        <code>.i-radio · .i-check<br>.i-option · .i-option--selected</code>
+      </div>
+      <div class="doc-spec__demo">
+        <template data-demo>
+          <div class="i-field-pair">
+            <div class="i-stack i-stack--tight">
+              <label class="i-radio"><input type="radio" name="d-cred" checked><span>Criar credencial nova<small>Recomendado — apagável depois.</small></span></label>
+              <label class="i-radio"><input type="radio" name="d-cred"><span>Usar credencial existente<small>Informe o id nas opções avançadas.</small></span></label>
+              <label class="i-check"><input type="checkbox"><span>Certificado próprio (autoassinado)<small>Marque se a conexão falhar. Continua criptografada.</small></span></label>
+            </div>
+            <div class="i-stack i-stack--tight">
+              <button class="i-option i-option--selected" type="button" aria-checked="true" role="radio">
+                <b class="i-option__title">Instalação automática</b>
+                <span class="i-option__desc">O instalador publica e ativa tudo. ~10 min.</span>
+              </button>
+              <button class="i-option" type="button" aria-checked="false" role="radio">
+                <b class="i-option__title">Manual com os arquivos</b>
+                <span class="i-option__desc">Baixe o pacote e importe você mesmo.</span>
+              </button>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- Stepper -->
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Stepper</h3>
+        <p>Quadrado de 30px, raio zero. Concluído teal com check; ativo azul com número; futuro branco com contorno — cor flat, nunca opacidade. O JS move o estado; o HTML já nasce com o passo 1 ativo, então funciona sem JS.</p>
+        <code>.i-stepper · .i-step<br>.i-step--done · --active · --future<br>StartSeUI.stepper(el).active(n)</code>
+      </div>
+      <div class="doc-spec__demo">
+        <template data-demo>
+          <nav class="i-stepper" id="demo-stepper" style="max-width:320px;" data-i-stepper>
+            <div class="i-step" data-i-step><span class="i-step__dot">1</span><div><b class="i-step__title">Instalar os workflows</b><span class="i-step__desc">No seu n8n, com credenciais criadas na hora.</span></div></div>
+            <div class="i-step" data-i-step><span class="i-step__dot">2</span><div><b class="i-step__title">Criar o banco e a sua conta</b><span class="i-step__desc">Tabelas, regras de segurança, administrador.</span></div></div>
+            <div class="i-step" data-i-step><span class="i-step__dot">3</span><div><b class="i-step__title">Conferir</b><span class="i-step__desc">Bate nos webhooks e testa o login.</span></div></div>
+          </nav>
+        </template>
+        <button class="i-btn i-btn--sm" id="demo-stepper-next" style="margin-top:16px;">Avançar o passo</button>
+      </div>
+    </div>
+
+    <!-- Card de passo -->
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Card de passo</h3>
+        <p>O contêiner de tudo que o passo pede: eyebrow azul com a posição, título em verbo, um parágrafo de contexto, campos, ações. Só existe um por tela.</p>
+        <code>.i-card · .i-card__actions<br>.i-eyebrow · .i-h-step · .i-body</code>
+      </div>
+      <div class="doc-spec__demo">
+        <template data-demo>
+          <div class="i-card" style="max-width:520px;">
+            <span class="i-eyebrow">Passo 1 de 3</span>
+            <h2 class="i-h-step">Instalar os workflows</h2>
+            <p class="i-body">Publica os 10 workflows no seu n8n e cria as credenciais na hora. Nada sai da sua infraestrutura.</p>
+            <div class="i-field">
+              <label class="i-field__label" for="d-card">Endereço do seu n8n</label>
+              <input class="i-field__input" id="d-card" placeholder="https://n8n.suaempresa.com">
+              <p class="i-field__help">Onde achar: é a URL que você abre no navegador.</p>
+            </div>
+            <div class="i-card__actions">
+              <button class="i-btn i-btn--primary">Instalar os workflows</button>
+              <button class="i-btn i-btn--tertiary">Prefiro importar na mão</button>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- Execução e log -->
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Execução e log</h3>
+        <p>Enquanto roda: spinner + frase com expectativa de tempo. Cada etapa concluída entra no log — check teal, nome à esquerda, detalhe técnico em mono à direita. Erro interrompe, nomeia a causa provável e oferece a próxima ação. Nunca "erro desconhecido".</p>
+        <code>.i-run · .i-log__row<br>.i-log__det · .i-log__err<br>StartSeUI.runLog(el)</code>
+      </div>
+      <div class="doc-spec__demo">
+        <template data-demo>
+          <div id="demo-runlog" style="max-width:520px;"></div>
+        </template>
+        <button class="i-btn i-btn--sm" id="demo-runlog-start" style="margin-top:16px;">Rodar de novo</button>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Superfícies de status</h3>
+        <p>Resumo de passo concluído com badge teal e os números que provam o resultado. Alertas com border-top na cor semântica. Aviso é condição degradada que não bloqueia. Conclusão só depois da verificação de verdade.</p>
+        <code>.i-summary · .i-badge-check<br>.i-alert--info · --warn · --error<br>.i-done · .i-access</code>
+      </div>
+      <div class="doc-spec__demo">
+        <template data-demo>
+          <div class="i-stack" style="max-width:560px;">
+            <div class="i-summary">
+              <span class="i-badge-check"><span class="i-ico i-ico--check i-ico--sm"></span></span>
+              <div>
+                <b class="i-name">Workflows instalados no seu n8n</b>
+                <span class="i-summary__meta">10 criados · 10 ativos · webhooks em n8n.suaempresa.com/webhook</span>
+              </div>
+            </div>
+            <div class="i-alert i-alert--info">
+              <b class="i-alert__title">Antes de começar</b>
+              <span class="i-alert__text">No Supabase, use a conexão do pooler — a direta recusa conexões de fora da VPC.</span>
+            </div>
+            <div class="i-alert i-alert--warn">
+              <b class="i-alert__title">Instalação parcial</b>
+              <span class="i-alert__text">Sem a chave do OpenRouter o parecer sai pelo resumo determinístico. Dá para adicionar depois.</span>
+            </div>
+            <div class="i-alert i-alert--error">
+              <b class="i-alert__title">Não foi possível conectar</b>
+              <span class="i-alert__text">O endereço não respondeu em 10s. Confira se o n8n está no ar e tente de novo.</span>
+            </div>
+            <div class="i-access">
+              <div class="i-access__head">
+                <span class="i-access__label">Seu acesso — anote agora</span>
+                <span class="i-access__hint">some ao sair desta tela</span>
+              </div>
+              <div class="i-access__grid">
+                <span class="i-access__key">Usuário</span>
+                <span class="i-access__val">renata@suaempresa.com</span>
+                <span class="i-access__key">Senha</span>
+                <span class="i-access__note">a que você digitou — provisória, troca no 1º acesso</span>
+              </div>
+            </div>
+            <div class="i-done">
+              <h2 class="i-h-block">Instalação conferida. Pode usar.</h2>
+              <p class="i-body" style="margin:0 0 16px;">Os 10 webhooks responderam e o login funcionou. Apague a chave da API do n8n — ela já não é necessária.</p>
+              <div class="i-row">
+                <button class="i-btn i-btn--primary">Abrir a aplicação<span class="i-ico i-ico--out"></span></button>
+                <button class="i-btn i-btn--secondary">Voltar à solução</button>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- Tags, chips, tabs -->
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Tags, chips e tabs</h3>
+        <p>Tag grita status: caps 10px, fundo semântico, raio zero. Chip só descreve: sentence case, raio 2px. Tabs para vistas paralelas do mesmo conteúdo — nunca para os passos, que são o stepper. As setas do teclado navegam.</p>
+        <code>.i-tag--info · --ok · --warn · --err<br>.i-chip · .i-tabs · .i-tab--active<br>data-i-tabs · data-i-tab</code>
+      </div>
+      <div class="doc-spec__demo">
+        <template data-demo>
+          <div class="i-stack">
+            <div class="i-row">
+              <span class="i-tag i-tag--info">Instalador</span>
+              <span class="i-tag i-tag--ok">Instalado</span>
+              <span class="i-tag i-tag--warn">Parcial</span>
+              <span class="i-tag i-tag--err">Falhou</span>
+            </div>
+            <div class="i-row">
+              <span class="i-chip">10 workflows</span>
+              <span class="i-chip">Postgres</span>
+              <span class="i-chip">~10 min</span>
+            </div>
+            <div>
+              <div class="i-tabs" data-i-tabs style="max-width:520px;">
+                <button class="i-tab i-tab--active" data-i-tab="#d-tab-1">Resumo</button>
+                <button class="i-tab" data-i-tab="#d-tab-2">Log completo</button>
+                <button class="i-tab" data-i-tab="#d-tab-3">O que foi criado</button>
+              </div>
+              <div class="i-tabpanel" id="d-tab-1" style="padding-top:14px;"><p class="i-body" style="margin:0;">10 workflows ativos, 1 banco, 14 tabelas.</p></div>
+              <div class="i-tabpanel" id="d-tab-2" style="padding-top:14px;" hidden><p class="i-mono" style="margin:0;">POST /api/v1/workflows → 201 · 212 ms</p></div>
+              <div class="i-tabpanel" id="d-tab-3" style="padding-top:14px;" hidden><p class="i-body" style="margin:0;">A tabela de inventário entra aqui.</p></div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- Utilitários de dado -->
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Copiável, progresso e tabela</h3>
+        <p>Campo copiável para valor que vai para outra ferramenta — o botão vira "Copiado" por 2s. Progresso só quando o total é conhecido; sem total, spinner, nunca porcentagem inventada. Tabela para o inventário do que foi criado: sem zebra, sem borda externa.</p>
+        <code>.i-copy + data-i-copy<br>.i-progress · StartSeUI.progress()<br>.i-table</code>
+      </div>
+      <div class="doc-spec__demo">
+        <template data-demo>
+          <div class="i-stack i-stack--loose" style="max-width:560px;">
+            <div class="i-copy">
+              <code data-i-copy-source>https://n8n.suaempresa.com/webhook/atendimento</code>
+              <button type="button" data-i-copy>Copiar</button>
+            </div>
+            <div id="demo-progress" data-i-progress data-i-progress-label="Publicando workflows"></div>
+            <table class="i-table">
+              <thead><tr><th>Workflow</th><th>Nós</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>Atendimento — entrada</td><td class="i-mono">14</td><td><span class="i-tag i-tag--ok">Ativo</span></td></tr>
+                <tr><td>Classificação do caso</td><td class="i-mono">22</td><td><span class="i-tag i-tag--ok">Ativo</span></td></tr>
+                <tr><td>Resposta ao cliente</td><td class="i-mono">18</td><td><span class="i-tag i-tag--warn">Inativo</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Modal de confirmação</h3>
+        <p>Só para ação irreversível ou que sobrescreve algo do aluno. O título nomeia a consequência, nunca "Tem certeza?". Cancelar como terciário à esquerda; confirmação destrutiva em vermelho. Esc cancela; clique fora não fecha.</p>
+        <code>.i-modal-scrim · .i-modal<br>data-i-modal-open · data-i-modal-close<br>StartSeUI.modal.confirm()</code>
+      </div>
+      <div class="doc-spec__demo">
+        <p class="i-body" style="margin:0 0 14px;">O jeito recomendado é programático — <code>confirm()</code> devolve uma Promise, então o fluxo do instalador fica linear:</p>
+        <button class="i-btn i-btn--danger" id="demo-confirm">Sobrescrever workflows</button>
+        <p class="i-mono" id="demo-confirm-out" style="margin-top:10px;">retornou: —</p>
+        <template data-demo>
+          <div class="i-modal" style="margin:20px 0 0;">
+            <h2 class="i-h-block">Isso vai sobrescrever 3 workflows existentes</h2>
+            <p class="i-body" style="margin:0;">Encontramos workflows com o mesmo nome no seu n8n. Sobrescrever apaga as alterações que você fez neles.</p>
+            <div class="i-modal__actions">
+              <button class="i-btn i-btn--tertiary" data-i-modal-close>Cancelar</button>
+              <div class="i-modal__confirm">
+                <button class="i-btn i-btn--secondary">Manter os meus</button>
+                <button class="i-btn i-btn--danger">Sobrescrever</button>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPORTAMENTOS ============ -->
+  <section class="doc-section" id="comportamentos">
+    <h2 class="doc-h2">Comportamentos por atributo</h2>
+    <p class="doc-lede">Marcação declarativa: você escreve HTML, o kit liga o comportamento. Os cliques são tratados por delegação no <code>document</code>, então HTML injetado depois — um passo que aparece, um log que cresce — já funciona sem chamar nada.</p>
+    <table class="doc-attrs">
+      <thead><tr><th>Atributo</th><th>O que faz</th></tr></thead>
+      <tbody>
+        <tr><td>data-i-copy</td><td>Botão que copia. Sem valor, copia o <code>&lt;code&gt;</code> do <code>.i-copy</code> em volta (ou o <code>[data-i-copy-source]</code>); com valor, copia o valor. Vira "Copiado" por 2s. Tem fallback para contexto sem permissão de clipboard.</td></tr>
+        <tr><td>data-i-copy-source</td><td>Marca de onde vem o texto, quando o <code>.i-copy</code> tem mais de um candidato.</td></tr>
+        <tr><td>data-i-tabs</td><td>No container <code>.i-tabs</code>. Aplica os papéis ARIA e liga ←/→/Home/End.</td></tr>
+        <tr><td>data-i-tab="#painel"</td><td>Em cada botão de tab, apontando para o <code>.i-tabpanel</code> que ele controla.</td></tr>
+        <tr><td>data-i-theme-toggle</td><td>Alterna light/dark e persiste em <code>localStorage</code>. Mantém o <code>aria-pressed</code> em sincronia.</td></tr>
+        <tr><td>data-i-modal-open="#id"</td><td>Abre o <code>.i-modal-scrim</code> daquele id, com trap de foco e trava de scroll.</td></tr>
+        <tr><td>data-i-modal-close</td><td>Fecha o modal aberto e devolve o foco para quem o abriu.</td></tr>
+        <tr><td>data-i-modal-dismissible</td><td>No scrim: libera o fechamento por clique fora. Sem ele, só Esc ou botão — sair sem querer de uma confirmação destrutiva é pior que um clique a mais.</td></tr>
+        <tr><td>data-i-reveal</td><td>Botão que mostra/esconde o valor de um campo <code>type="password"</code>, trocando o ícone.</td></tr>
+        <tr><td>data-i-step</td><td>Marca cada passo do stepper para a API <code>stepper()</code> encontrar.</td></tr>
+        <tr><td>data-i-progress-label</td><td>Rótulo inicial da barra de progresso.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ API ============ -->
+  <section class="doc-section" id="api">
+    <h2 class="doc-h2">API JS</h2>
+    <p class="doc-lede">O global <code>StartSeUI</code> cobre o miolo de um instalador: mover o stepper, escrever o log, travar o botão enquanto roda, confirmar o irreversível. Todo texto que você passa entra por <code>textContent</code> — mensagem de erro de API é dado não confiável e o kit trata como tal.</p>
+
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Um passo, ponta a ponta</h3>
+        <p>O padrão que se repete em todo instalador: trava o botão, abre o log, executa, e ou conclui o passo ou para com a próxima ação na mão do aluno.</p>
+        <code>stepper · runLog · button<br>progress · modal.confirm · theme</code>
+      </div>
+      <div class="doc-spec__demo">
+        <div class="doc-code__body">
+<pre><code>const passos = StartSeUI.stepper('[data-i-stepper]')
+const log    = StartSeUI.runLog('#execucao')
+const botao  = StartSeUI.button('#instalar')
+
+async function instalar() {
+  botao.loading(true)
+  log.clear().start('Publicando os workflows — leva alguns segundos.')
+
+  try {
+    const n8n = await conectar()
+    log.ok('Conectando ao seu n8n', `versão ${n8n.version} · API ok`)
+
+    const { criados, total } = await publicar()
+    log.ok(`Publicando ${total} workflows`, `${criados} criados · ${criados} ativos`)
+
+    log.stop()
+    passos.active(2)                      // passo 1 vira concluído
+  } catch (erro) {
+    log.fail('Publicando os workflows', {
+      error: erro.mensagemParaOAluno,     // causa provável + como corrigir
+      retry: instalar,                    // o botão só aparece se houver retry
+    })
+  } finally {
+    botao.loading(false)
+  }
+}
+
+// Ação que sobrescreve algo do aluno: confirma nomeando a consequência.
+if (conflitos.length) {
+  const ok = await StartSeUI.modal.confirm({
+    title: `Isso vai sobrescrever ${conflitos.length} workflows existentes`,
+    text: 'Sobrescrever apaga as alterações que você fez neles.',
+    confirm: 'Sobrescrever',
+    alternative: 'Manter os meus',       // resolve com 'alternative'
+    danger: true,
+  })
+  if (!ok) return
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <table class="doc-attrs">
+      <thead><tr><th>Chamada</th><th>Retorna</th></tr></thead>
+      <tbody>
+        <tr><td>StartSeUI.stepper(el)</td><td><code>.active(n)</code>, <code>.done(n)</code>, <code>.next()</code>, <code>.current</code>, <code>.length</code>. Dispara <code>i:step</code>.</td></tr>
+        <tr><td>StartSeUI.runLog(el)</td><td><code>.start(msg)</code>, <code>.ok(nome, detalhe)</code>, <code>.warn(…)</code>, <code>.fail(nome, {error, retry})</code>, <code>.stop()</code>, <code>.clear()</code>, <code>.row(variante, nó)</code>. Dispara <code>i:log</code>.</td></tr>
+        <tr><td>StartSeUI.progress(el)</td><td><code>.set(atual, total)</code>, <code>.label(texto)</code>.</td></tr>
+        <tr><td>StartSeUI.button(el)</td><td><code>.loading(bool)</code>, <code>.label(texto)</code>.</td></tr>
+        <tr><td>StartSeUI.modal</td><td><code>.open(el|sel)</code>, <code>.close()</code>, <code>.confirm({…})</code> → Promise&lt;true | false | 'alternative'&gt;.</td></tr>
+        <tr><td>StartSeUI.theme</td><td><code>.get()</code>, <code>.set('dark'|'light'|null)</code>, <code>.toggle()</code>. <code>null</code> volta a seguir o sistema. Dispara <code>i:themechange</code>.</td></tr>
+        <tr><td>StartSeUI.copy(texto)</td><td>Promise&lt;boolean&gt;. Usa a Clipboard API com fallback.</td></tr>
+        <tr><td>StartSeUI.init(root)</td><td>Prepara marcação declarativa recém-injetada. Idempotente. Roda sozinho no carregamento.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ VOZ ============ -->
+  <section class="doc-section" id="voz">
+    <h2 class="doc-h2">Voz e regras de escrita</h2>
+    <p class="doc-lede">O kit padroniza a aparência; isto padroniza o texto. Vale tanto quanto o CSS — um instalador bonito que fala mal continua assustando o aluno.</p>
+    <div class="doc-two">
+      <div class="doc-panel">
+        <span class="doc-panel__title doc-panel__title--yes">Assim</span>
+        <ul>
+          <li>"Instalar os workflows" — título é verbo, você direto, sentence case.</li>
+          <li>"Leva alguns segundos" — toda espera diz quanto tempo.</li>
+          <li>"10 criados · 10 ativos" — resultado se prova com número.</li>
+          <li>"Gere outra em Settings → n8n API" — erro sempre diz o caminho da correção.</li>
+          <li>"Apague a chave depois da instalação" — segurança como instrução, não como aviso jurídico.</li>
+        </ul>
+      </div>
+      <div class="doc-panel">
+        <span class="doc-panel__title doc-panel__title--no">Nunca</span>
+        <ul>
+          <li>Emoji, exclamação dupla, "Parabéns!!" — celebração é o resultado, não confete.</li>
+          <li>Jargão sem tradução: "RLS", "idempotente" — diga o efeito ("regras de segurança").</li>
+          <li>ALL CAPS fora da tag INSTALADOR e dos eyebrows.</li>
+          <li>"Erro desconhecido" — todo erro nomeia a causa provável e a próxima ação.</li>
+          <li>Prometer o que não verificou: "Pode usar" só depois do passo de conferência.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="doc-spec">
+      <div class="doc-spec__info">
+        <h3>Próximo passo</h3>
+        <p>O gabarito para um instalador novo é o exemplo montado: barra, stepper, resumo, card ativo, execução e conclusão, tudo funcionando.</p>
+      </div>
+      <div class="doc-spec__demo">
+        <a class="i-btn i-btn--primary" href="./exemplo.html">Abrir o exemplo completo<span class="i-ico i-ico--out"></span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="./tokens.data.js"></script>
+<script src="../dist/startse-installer.js"></script>
+<script src="./docs.js"></script>
+</body>
+</html>
