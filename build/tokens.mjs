@@ -33,6 +33,11 @@ function declarations(group, prefix, indent = '  ') {
  *
  * Ordem: light em :root (base herdada) → dark por atributo explícito →
  * dark por preferência do sistema, exceto quando o autor forçou light.
+ *
+ * O bloco light também casa `:host`: dentro de um Shadow DOM, `:root` não casa
+ * com nada, e sem isto todos os tokens ficariam indefinidos quando o
+ * instalador é montado como custom element. No documento normal `:host` não
+ * casa com nada, então não custa.
  */
 export function renderTokensCss(tokens, { version } = {}) {
   const prefix = tokens.meta?.prefix ?? 'i'
@@ -45,6 +50,7 @@ export function renderTokensCss(tokens, { version } = {}) {
     version ? ` (v${version})` : ''
   } */
 :root,
+:host,
 [data-theme="light"] {
   color-scheme: light;
 ${light}
