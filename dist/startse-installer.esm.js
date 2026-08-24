@@ -1,4 +1,4 @@
-/*! StartSe · UI Kit dos Instaladores v0.1.0 — ESM
+/*! StartSe · UI Kit dos Instaladores v0.1.1 — ESM
  * Documentação e componentes: docs/index.html
  * Gerado por build/build.mjs. Não edite dist/ à mão. */
 
@@ -510,10 +510,10 @@ function button(target) {
 }
 
 // src/js/index.js
-var version = "0.1.0";
+var version = "0.1.1";
 var delegated = false;
 function onClick(event) {
-  const target = event.target;
+  const target = event.composedPath?.()[0] ?? event.target;
   const copyBtn = closestAttr(target, "data-i-copy");
   if (copyBtn) {
     event.preventDefault();
@@ -550,7 +550,9 @@ function onClick(event) {
   }
 }
 function toggleReveal(btn) {
-  const field = btn.getAttribute("data-i-reveal") && document.querySelector(btn.getAttribute("data-i-reveal")) || btn.closest(".i-field__wrap, .i-field")?.querySelector(".i-field__input");
+  const raiz = btn.getRootNode();
+  const seletor = btn.getAttribute("data-i-reveal");
+  const field = seletor && raiz.querySelector(seletor) || btn.closest(".i-field__wrap, .i-field")?.querySelector(".i-field__input");
   if (!field) return;
   const hidden = field.type === "password";
   field.type = hidden ? "text" : "password";

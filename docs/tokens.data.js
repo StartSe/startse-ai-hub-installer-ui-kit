@@ -1,6 +1,6 @@
 /* Gerado por build/build.mjs — não edite. */
 window.I_TOKENS = {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "light": [
     {
       "name": "canvas",

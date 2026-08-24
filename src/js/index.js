@@ -33,7 +33,16 @@ export const version = __VERSION__
 let delegated = false
 
 function onClick(event) {
-  const target = event.target
+  /*
+   * `composedPath()[0]`, e não `event.target`: quando o clique nasce dentro de
+   * um Shadow DOM, o navegador re-alveja o evento no host antes de ele chegar
+   * ao documento, e `target` vira o elemento hospedeiro — nunca o botão. O
+   * caminho composto guarda o alvo real.
+   *
+   * Sem isto, nenhum comportamento declarativo do kit funciona quando o
+   * instalador é montado como custom element dentro de outra aplicação.
+   */
+  const target = event.composedPath?.()[0] ?? event.target
 
   const copyBtn = closestAttr(target, 'data-i-copy')
   if (copyBtn) {
@@ -77,8 +86,12 @@ function onClick(event) {
 }
 
 function toggleReveal(btn) {
+  // A raiz é a do próprio botão: dentro de um Shadow DOM, `document` não
+  // enxerga o campo, e um seletor por id casaria com o da página hospedeira.
+  const raiz = btn.getRootNode()
+  const seletor = btn.getAttribute('data-i-reveal')
   const field =
-    (btn.getAttribute('data-i-reveal') && document.querySelector(btn.getAttribute('data-i-reveal'))) ||
+    (seletor && raiz.querySelector(seletor)) ||
     btn.closest('.i-field__wrap, .i-field')?.querySelector('.i-field__input')
   if (!field) return
 
