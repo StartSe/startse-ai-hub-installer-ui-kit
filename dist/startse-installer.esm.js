@@ -1,4 +1,4 @@
-/*! StartSe · UI Kit dos Instaladores v0.1.0 — ESM
+/*! StartSe · UI Kit dos Instaladores v0.1.1 — ESM
  * Documentação e componentes: docs/index.html
  * Gerado por build/build.mjs. Não edite dist/ à mão. */
 
@@ -510,7 +510,7 @@ function button(target) {
 }
 
 // src/js/index.js
-var version = "0.1.0";
+var version = "0.1.1";
 var delegated = false;
 function onClick(event) {
   const target = event.composedPath?.()[0] ?? event.target;

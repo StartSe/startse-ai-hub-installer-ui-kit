@@ -1,4 +1,4 @@
-/*! StartSe · UI Kit dos Instaladores v0.1.0 — IIFE · global StartSeUI
+/*! StartSe · UI Kit dos Instaladores v0.1.1 — IIFE · global StartSeUI
  * Documentação e componentes: docs/index.html
  * Gerado por build/build.mjs. Não edite dist/ à mão. */
 
@@ -542,7 +542,7 @@ var StartSeUI = (() => {
   }
 
   // src/js/index.js
-  var version = "0.1.0";
+  var version = "0.1.1";
   var delegated = false;
   function onClick(event) {
     const target = event.composedPath?.()[0] ?? event.target;
